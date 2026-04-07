@@ -22,6 +22,7 @@
 
 (function() {
 	var WebRTC = {
+    WEBRTC__proxied: 'sync',
 		$WEBRTC: {
 			peerConnectionsMap: {},
 			dataChannelsMap: {},
@@ -171,7 +172,7 @@
 		},
 
 		rtcCreatePeerConnection: function(pUrls, pUsernames, pPasswords, nIceServers) {
-			if(!window.RTCPeerConnection) return 0;
+			if(!globalThis.RTCPeerConnection) return 0;
 			var iceServers = [];
 			for(var i = 0; i < nIceServers; ++i) {
 				var heap = Module['HEAPU32'];
