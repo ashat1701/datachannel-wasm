@@ -23,7 +23,6 @@
 (function () {
 	var WebRTC = {
 		WEBRTC__proxied: 'sync',
-		WEBRTC__proxy: 'sync',
 
 		$WEBRTC: {
 			peerConnectionsMap: {},
