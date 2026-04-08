@@ -257,14 +257,17 @@
 		},
 
 		rtcCreateDataChannel__proxy: "sync",
-		rtcCreateDataChannel: function (pc, pLabel, unordered, maxRetransmits, maxPacketLifeTime) {
+		rtcCreateDataChannel: function (pc, pLabel, unordered, maxRetransmits, maxPacketLifeTime, negotigated, id) {
 			if (!pc) return 0;
 			var label = UTF8ToString(pLabel);
 			var peerConnection = WEBRTC.peerConnectionsMap[pc];
 			var datachannelInit = {
 				ordered: !unordered,
+				negotiated: negotigated,
 			};
-
+			if (negotigated) {
+				datachannelInit.id = id;
+			}
 			// Browsers throw an exception when both are present (even if set to null)
 			if (maxRetransmits >= 0) datachannelInit.maxRetransmits = maxRetransmits;
 			else if (maxPacketLifeTime >= 0) datachannelInit.maxPacketLifeTime = maxPacketLifeTime;
