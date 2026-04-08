@@ -84,7 +84,7 @@
 						var pType = WEBRTC.allocUTF8FromString(desc.type);
 						var callback = peerConnection.rtcDescriptionCallback;
 						var userPointer = peerConnection.rtcUserPointer || 0;
-						{ { { makeDynCall('viii', 'callback') } } } (pSdp, pType, userPointer);
+						{{{makeDynCall('viii', 'callback')}}}(pSdp, pType, userPointer);
 						_free(pSdp);
 						_free(pType);
 					});
@@ -97,7 +97,7 @@
 				var pSdpMid = WEBRTC.allocUTF8FromString(candidate.sdpMid);
 				var candidateCallback = peerConnection.rtcCandidateCallback;
 				var userPointer = peerConnection.rtcUserPointer || 0;
-				{ { { makeDynCall('viii', 'candidateCallback') } } } (pCandidate, pSdpMid, userPointer);
+				{{{makeDynCall('viii', 'candidateCallback')}}} (pCandidate, pSdpMid, userPointer);
 				_free(pCandidate);
 				_free(pSdpMid);
 			},
@@ -116,7 +116,7 @@
 				if (connectionState in map) {
 					var stateChangeCallback = peerConnection.rtcStateChangeCallback;
 					var userPointer = peerConnection.rtcUserPointer || 0;
-					{ { { makeDynCall('vii', 'stateChangeCallback') } } } (map[connectionState], userPointer);
+					{{{makeDynCall('vii', 'stateChangeCallback')}}}(map[connectionState], userPointer);
 				}
 			},
 
@@ -135,7 +135,7 @@
 				if (iceConnectionState in map) {
 					var iceStateChangeCallback = peerConnection.rtcIceStateChangeCallback;
 					var userPointer = peerConnection.rtcUserPointer || 0;
-					{ { { makeDynCall('vii', 'iceStateChangeCallback') } } } (map[iceConnectionState], userPointer);
+					{{{makeDynCall('vii', 'iceStateChangeCallback')}}}(map[iceConnectionState], userPointer);
 				}
 			},
 
@@ -150,7 +150,7 @@
 				if (iceGatheringState in map) {
 					var gatheringStateChangeCallback = peerConnection.rtcGatheringStateChangeCallback;
 					var userPointer = peerConnection.rtcUserPointer || 0;
-					{ { { makeDynCall('vii', 'gatheringStateChangeCallback') } } } (map[iceGatheringState], userPointer);
+					{{{makeDynCall('vii', 'gatheringStateChangeCallback')}}}(map[iceGatheringState], userPointer);
 				}
 			},
 
@@ -167,7 +167,7 @@
 				if (signalingState in map) {
 					var signalingStateChangeCallback = peerConnection.rtcSignalingStateChangeCallback;
 					var userPointer = peerConnection.rtcUserPointer || 0;
-					{ { { makeDynCall('vii', 'signalingStateChangeCallback') } } } (map[signalingState], userPointer);
+					{{{makeDynCall('vii', 'signalingStateChangeCallback')}}}(map[signalingState], userPointer);
 				}
 			},
 		},
@@ -290,7 +290,7 @@
 				if (peerConnection.rtcUserDeleted) return;
 				var dc = WEBRTC.registerDataChannel(evt.channel);
 				var userPointer = peerConnection.rtcUserPointer || 0;
-				{ { { makeDynCall('vii', 'dataChannelCallback') } } } (dc, userPointer);
+				{{{makeDynCall('vii', 'dataChannelCallback')}}} (dc, userPointer);
 			};
 		},
 
@@ -417,7 +417,7 @@
 			var cb = function () {
 				if (dataChannel.rtcUserDeleted) return;
 				var userPointer = dataChannel.rtcUserPointer || 0;
-				{ { { makeDynCall('vi', 'openCallback') } } } (userPointer);
+				{{{makeDynCall('vi', 'openCallback')}}}(userPointer);
 			};
 			dataChannel.onopen = cb;
 			if (dataChannel.readyState == 'open') setTimeout(cb, 0);
@@ -431,7 +431,7 @@
 				if (dataChannel.rtcUserDeleted) return;
 				var userPointer = dataChannel.rtcUserPointer || 0;
 				var pError = evt.message ? WEBRTC.allocUTF8FromString(evt.message) : 0;
-				{ { { makeDynCall('vii', 'errorCallback') } } } (pError, userPointer);
+				{{{makeDynCall('vii', 'errorCallback')}}}(pError, userPointer);
 				_free(pError);
 			};
 			dataChannel.onerror = cb;
@@ -446,7 +446,7 @@
 				var userPointer = dataChannel.rtcUserPointer || 0;
 				if (typeof evt.data == 'string') {
 					var pStr = WEBRTC.allocUTF8FromString(evt.data);
-					{ { { makeDynCall('viii', 'messageCallback') } } } (pStr, -1, userPointer);
+					{{{makeDynCall('viii', 'messageCallback')}}}(pStr, -1, userPointer);
 					_free(pStr);
 				} else {
 					var byteArray = new Uint8Array(evt.data);
@@ -454,14 +454,14 @@
 					var pBuffer = _malloc(size);
 					var heapBytes = new Uint8Array(Module['HEAPU8'].buffer, pBuffer, size);
 					heapBytes.set(byteArray);
-					{ { { makeDynCall('viii', 'messageCallback') } } } (pBuffer, size, userPointer);
+					{{{makeDynCall('viii', 'messageCallback')}}}(pBuffer, size, userPointer);
 					_free(pBuffer);
 				}
 			};
 			dataChannel.onclose = function () {
 				if (dataChannel.rtcUserDeleted) return;
 				var userPointer = dataChannel.rtcUserPointer || 0;
-				{ { { makeDynCall('viii', 'messageCallback') } } } (0, 0, userPointer);
+				{{{makeDynCall('viii', 'messageCallback')}}}(0, 0, userPointer);
 			};
 		},
 
@@ -472,7 +472,7 @@
 			var cb = function (evt) {
 				if (dataChannel.rtcUserDeleted) return;
 				var userPointer = dataChannel.rtcUserPointer || 0;
-				{ { { makeDynCall('vi', 'bufferedAmountLowCallback') } } } (userPointer);
+				{{{makeDynCall('vi', 'bufferedAmountLowCallback')}}}(userPointer);
 			};
 			dataChannel.onbufferedamountlow = cb;
 		},
@@ -523,3 +523,4 @@
 	autoAddDeps(WebRTC, '$WEBRTC');
 	mergeInto(LibraryManager.library, WebRTC);
 })();
+
