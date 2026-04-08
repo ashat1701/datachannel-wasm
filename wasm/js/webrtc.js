@@ -257,13 +257,13 @@
 		},
 
 		rtcCreateDataChannel__proxy: "sync",
-		rtcCreateDataChannel: function (pc, pLabel, unordered, maxRetransmits, maxPacketLifeTime, negotigated, id) {
+		rtcCreateDataChannel: function (pc, pLabel, unordered, maxRetransmits, maxPacketLifeTime, negotiated, id) {
 			if (!pc) return 0;
 			var label = UTF8ToString(pLabel);
 			var peerConnection = WEBRTC.peerConnectionsMap[pc];
 			var datachannelInit = {
 				ordered: !unordered,
-				negotiated: negotigated,
+				negotiated: negotiated,
 			};
 			if (negotigated) {
 				datachannelInit.id = id;

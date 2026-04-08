@@ -38,7 +38,7 @@ namespace rtc {
 
 struct DataChannelInit {
 	Reliability reliability = {};
-	bool negotigated;
+	bool negotiated;
 	int id;
 };
 
