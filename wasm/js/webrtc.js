@@ -265,7 +265,7 @@
 				ordered: !unordered,
 				negotiated: negotiated,
 			};
-			if (negotigated) {
+			if (negotiated) {
 				datachannelInit.id = id;
 			}
 			// Browsers throw an exception when both are present (even if set to null)
